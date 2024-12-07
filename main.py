@@ -1,47 +1,28 @@
 import sys
-import pyttsx3
+from gtts import gTTS
 
 def text_to_audio_local(input_file, output_file):
     try:
-        # Lire le contenu du fichier texte
-        print(f"Lecture du fichier texte : {input_file}")
+        # Read the content of the text file
+        print(f"Reading text file: {input_file}")
         with open(input_file, 'r', encoding='utf-8') as file:
             text = file.read()
-        
+
         if not text.strip():
-            print("Le fichier texte est vide.")
+            print("The text file is empty.")
             return
 
-        # Initialiser le moteur de synthèse vocale
-        print("Initialisation du moteur de synthèse vocale...")
-        engine = pyttsx3.init()
+        # Create the audio file using gTTS
+        print(f"Creating audio file: {output_file}")
+        tts = gTTS(text, lang='fr')
+        tts.save(output_file)
 
-        # Configurer les paramètres de voix (facultatif)
-        voices = engine.getProperty('voices')
-        print(f"Voix disponibles : {len(voices)}")
-        for voice in voices:
-            print(f"Voix disponible: {voice.name}, Langues: {voice.languages}")
-            if 'fr_FR' in voice.languages:  # Utilise une voix française si disponible
-                print(f"Voix sélectionnée : {voice.name}")
-                engine.setProperty('voice', voice.id)
-                break
-
-        # Configurer la vitesse (facultatif)
-        print("Configuration de la vitesse...")
-        engine.setProperty('rate', 150)  # Ajustez pour changer la vitesse
-
-        # Création du fichier audio
-        print(f"Création du fichier audio : {output_file}")
-        engine.say(text)
-        engine.save_to_file(text, output_file)
-        engine.runAndWait()
-
-        print(f"Fichier audio créé avec succès : {output_file}")
+        print(f"Audio file created successfully: {output_file}")
 
     except FileNotFoundError:
-        print(f"Erreur : Le fichier {input_file} n'existe pas.")
+        print(f"Error: The file {input_file} does not exist.")
     except Exception as e:
-        print(f"Une erreur est survenue : {e}")
+        print(f"An error occurred: {e}")
 
 if __name__ == "__main__":
     if len(sys.argv) == 2:
@@ -49,4 +30,4 @@ if __name__ == "__main__":
         output_file = input_file.replace('.txt', '.wav')
         text_to_audio_local(input_file, output_file)
     else:
-        print("Utilisation : python main.py fichier_texte.txt")
+        print("Usage: python main.py text_file.txt")

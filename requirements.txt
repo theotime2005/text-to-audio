@@ -1,4 +1,8 @@
 certifi==2024.8.30
+charset-normalizer==3.4.0
+click==8.1.7
+gTTS==2.5.4
+idna==3.10
 pyobjc==10.3.1
 pyobjc-core==10.3.1
 pyobjc-framework-Accessibility==10.3.1
@@ -153,4 +157,5 @@ pyobjc-framework-VideoToolbox==10.3.1
 pyobjc-framework-Virtualization==10.3.1
 pyobjc-framework-Vision==10.3.1
 pyobjc-framework-WebKit==10.3.1
-pyttsx3==2.98
+requests==2.32.3
+urllib3==2.2.3
