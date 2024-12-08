@@ -18,18 +18,12 @@ pip install -r requirements.txt
 ```
 
 ## Utilisation
-Il vous suffit de lancer le programme en passant en paramètre le nom du fichier.
+Vous pouvez lancer le programme en passant par l'interface utilisateur:
 ```shell
-python3 main.py <nom_du_fichier.txt>
+python3 main.py
 ```
 
 ## Pour sortir de l'environnement
 ```shell
 deactivate
 ```
-
-### Feature
-Trouver une solution pour que le texte ne soit pas énoncé au moment de la convertion.
-
-## Note
-Pour personaliser la voix, la liste des voix disponible sur le système est affichée au moment de la recherche. A vous de personnaliser le script pour qu'il utilise la voix de votre choix.
