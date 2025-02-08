@@ -1,12 +1,13 @@
 import sys
 from gtts import gTTS
 
+
 def text_to_audio_local(input_file, output_file, language, function):
     try:
         function("loading")
         # Read the content of the text file
         print(f"Reading text file: {input_file}")
-        with open(input_file, 'r', encoding='utf-8') as file:
+        with open(input_file, "r", encoding="utf-8") as file:
             text = file.read()
 
         if not text.strip():
@@ -29,10 +30,11 @@ def text_to_audio_local(input_file, output_file, language, function):
         print(f"An error occurred: {e}")
         function("error")
 
+
 if __name__ == "__main__":
     if len(sys.argv) == 2:
         input_file = sys.argv[1]
-        output_file = input_file.replace('.txt', '.wav')
+        output_file = input_file.replace(".txt", ".wav")
         text_to_audio_local(input_file, output_file)
     else:
         print("Usage: python convert_text_to_audio.py text_file.txt")

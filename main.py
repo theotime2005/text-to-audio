@@ -1,8 +1,17 @@
 import sys
 from convert_text_to_audio import text_to_audio_local
 from PyQt6.QtWidgets import (
-    QApplication, QMainWindow, QPushButton, QFileDialog, QVBoxLayout,
-    QLineEdit, QComboBox, QMessageBox, QWidget, QLabel, QProgressDialog
+    QApplication,
+    QMainWindow,
+    QPushButton,
+    QFileDialog,
+    QVBoxLayout,
+    QLineEdit,
+    QComboBox,
+    QMessageBox,
+    QWidget,
+    QLabel,
+    QProgressDialog,
 )
 from PyQt6.QtCore import Qt
 
@@ -29,7 +38,9 @@ class TextToAudioApp(QMainWindow):
 
         # Destination folder selection
         self.folder_input = QLineEdit(self)
-        self.folder_input.setPlaceholderText("Sélectionnez un dossier de destination...")
+        self.folder_input.setPlaceholderText(
+            "Sélectionnez un dossier de destination..."
+        )
         self.folder_input.setReadOnly(True)
         folder_button = QPushButton("Parcourir")
         folder_button.clicked.connect(self.select_folder)
@@ -54,7 +65,12 @@ class TextToAudioApp(QMainWindow):
         layout.addWidget(generate_button)
 
     def select_file(self):
-        file_name, _ = QFileDialog.getOpenFileName(self, "Sélectionnez un fichier texte", "", "Fichiers texte (*.txt);;Tous les fichiers (*)")
+        file_name, _ = QFileDialog.getOpenFileName(
+            self,
+            "Sélectionnez un fichier texte",
+            "",
+            "Fichiers texte (*.txt);;Tous les fichiers (*)",
+        )
         if file_name:
             self.file_input.setText(file_name)
 
@@ -68,7 +84,7 @@ class TextToAudioApp(QMainWindow):
         file_output_path = file_path.split(".")[0].split("/")[-1]
         folder_path = self.folder_input.text()
         choice = self.combo_box.currentText()
-        file_output=f"{folder_path}/{file_output_path}.wav"
+        file_output = f"{folder_path}/{file_output_path}.wav"
 
         print(f"Fichier sélectionné : {file_path}")
         print(f"Dossier de destination : {folder_path}")
@@ -77,7 +93,6 @@ class TextToAudioApp(QMainWindow):
 
         text_to_audio_local(file_path, file_output, choice, self.handle_state)
         QApplication.processEvents()  # Permet à l'UI de répondre pendant le chargement
-
 
     def handle_state(self, state: str):
         if state == "loading":
@@ -89,12 +104,16 @@ class TextToAudioApp(QMainWindow):
         elif state == "success":
             if hasattr(self, "progress"):
                 self.progress.close()
-            QMessageBox.information(self, "Succès", "L'opération a été réalisée avec succès.")
+            QMessageBox.information(
+                self, "Succès", "L'opération a été réalisée avec succès."
+            )
 
         elif state == "error":
             if hasattr(self, "progress"):
                 self.progress.close()
-            QMessageBox.critical(self, "Erreur", "Une erreur s'est produite pendant l'opération.")
+            QMessageBox.critical(
+                self, "Erreur", "Une erreur s'est produite pendant l'opération."
+            )
 
 
 if __name__ == "__main__":
