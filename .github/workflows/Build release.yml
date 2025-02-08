@@ -28,7 +28,7 @@ jobs:
       - name: Build application file
         run: |
           source .venv/bin/activate
-          pyinstaller --onefile main.py
+          pyinstaller --onefile --noconsole --name "Text to audio" main.py
 
       - name: Create release
         id: create_release
@@ -46,7 +46,7 @@ jobs:
       - name: Build a zip file with the executable
         # The file is in the "dist" folder
         run: |
-          zip -r release.zip dist
+          zip -r release.zip "dist/Text to audio.app"
 
       - name: Upload new file
         uses: actions/upload-release-asset@v1
